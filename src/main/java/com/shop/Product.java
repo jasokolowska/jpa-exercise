@@ -1,7 +1,7 @@
 package com.shop;
 
 
-import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,18 +13,18 @@ import java.util.UUID;
 @NoArgsConstructor
 @Setter
 @Getter
+@EqualsAndHashCode(of = "id")
 public class Product {
 
     @GeneratedValue
     @Id
     private UUID id;
-
     private String name;
-
     @Enumerated(EnumType.STRING)
     private Category category;
+    private Double price;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "producer_id")
+    private Producer producer;
 
-    @ManyToOne
-    @JoinColumn(name = "basket_ID")
-    private Basket basket;
 }

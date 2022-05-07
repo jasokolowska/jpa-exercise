@@ -9,22 +9,23 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
-@EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "basket")
 @NoArgsConstructor
 @Setter
 @Getter
+@EqualsAndHashCode(of = "id")
 public class Basket {
 
     @Id
     @GeneratedValue
     private UUID id;
-
-    @OneToMany(mappedBy = "basket")
+    @JoinTable(name = "basket_products", joinColumns = @JoinColumn(name = "basket_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Product> products;
-
-    @OneToOne(mappedBy = "basket")
+    @OneToOne
     private Client client;
 
 }
+
+
+

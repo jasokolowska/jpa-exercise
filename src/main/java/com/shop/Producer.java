@@ -5,10 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,14 +17,13 @@ import java.util.UUID;
 @Setter
 @Getter
 @EqualsAndHashCode(of = "id")
-public class Client {
+public class Producer {
 
-    @Id
     @GeneratedValue
+    @Id
     private UUID id;
-    private String firstName;
-    private String lastName;
-    @Embedded
-    private Address address;
+    private String name;
+    @OneToMany(mappedBy = "producer")
+    private List<Product> products;
 
 }
