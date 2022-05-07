@@ -1,30 +1,29 @@
 package com.shop;
 
-
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Table(name = "client")
 @NoArgsConstructor
 @Setter
 @Getter
-public class Product {
+public class Client {
 
-    @GeneratedValue
     @Id
+    @GeneratedValue
     private UUID id;
 
-    private String name;
+    private String firstName;
 
-    @Enumerated(EnumType.STRING)
-    private Category category;
+    private String lastName;
 
-    @ManyToOne
-    @JoinColumn(name = "basket_ID")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "basket_id")
     private Basket basket;
 }
