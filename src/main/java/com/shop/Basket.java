@@ -23,6 +23,7 @@ public class Basket {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Product> products;
     @OneToOne
+    @JoinColumn(name = "client_id")
     private Client client;
 
 }

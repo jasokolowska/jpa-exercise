@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -25,5 +22,7 @@ public class Client {
     private String lastName;
     @Embedded
     private Address address;
+    @OneToOne(mappedBy = "client")
+    private Basket basket;
 
 }
